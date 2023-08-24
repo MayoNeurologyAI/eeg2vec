@@ -10,7 +10,7 @@ class EpochDataset(Dataset):
         self.transform = transform
         
     def __len__(self):
-        return len(self.df)
+        return len(self.data)
     
     def __getitem__(self, idx):
         
