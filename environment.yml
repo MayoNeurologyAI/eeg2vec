@@ -20,4 +20,5 @@ dependencies:
     - charset-normalizer==3.2.0
     - gcsfs==2023.6.0
     - torch==1.13.1
+    - torchvision==0.13.1
     - autoreject==0.4.2
