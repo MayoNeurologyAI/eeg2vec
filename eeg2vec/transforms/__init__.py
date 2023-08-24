@@ -1,6 +1,6 @@
-from ._transforms import RandomTemporalEndCrop, UidToEpoch
+from ._transforms import RandomTemporalCrop, UidToEpoch
 
 __all__ = [
-    'RandomTemporalEndCrop',
+    'RandomTemporalCrop',
     'UidToEpoch'
 ]
