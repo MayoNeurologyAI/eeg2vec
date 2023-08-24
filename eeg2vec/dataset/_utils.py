@@ -17,8 +17,8 @@ class EpochDataset(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
         
-        uid = self.df.index[idx]
-        path = self.df.iloc[idx]['file_path']
+        uid = self.data.index[idx]
+        path = self.data.iloc[idx]['file_path']
         
         sample = {
             'uid' : uid,
