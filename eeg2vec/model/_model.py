@@ -336,7 +336,7 @@ class BendingCollegeWav2Vec(nn.Module):
         
         return logits, z, mask, embedding
     
-    def calculate_loss(self, inputs, outputs):
+    def calculate_loss(self, outputs):
         logits = outputs[0]
         labels = torch.zeros(logits.shape[0], device=logits.device, dtype=torch.long)
         # Note the loss_fn here integrates the softmax as per the normal classification pipeline (leveraging logsumexp)
