@@ -17,16 +17,15 @@ class RandomTemporalCrop(object):
         self.max_crop_frac = max_crop_frac
         self.temporal_axis = temporal_axis
 
-    def __call__(self, sample):
+    def __call__(self, x):
         
-        x = sample['epoch']
         trial_len = x.shape[self.temporal_axis]
         crop_len = np.random.randint(int((1 - self.max_crop_frac) * trial_len), trial_len)
         offset = np.random.randint(0, trial_len - crop_len)
         
-        sample['epoch'] = x[:, offset:offset + crop_len, ...]
+        x = x[:, offset:offset + crop_len, ...]
 
-        return sample
+        return x
     
 class UidToEpoch(object):
     
@@ -56,4 +55,4 @@ class UidToEpoch(object):
             
         epoch = self.cache[path]
         
-        return {'epoch' : epoch, 'uid' : uid, 'path' : path}
+        return epoch

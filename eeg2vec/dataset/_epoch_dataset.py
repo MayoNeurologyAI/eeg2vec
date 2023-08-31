@@ -25,7 +25,7 @@ class EpochDataset(Dataset):
             'path' : path
         }
         
-        return self.transform(sample)
+        return sample
 
 
 

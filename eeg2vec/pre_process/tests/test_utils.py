@@ -1,8 +1,8 @@
 import torch
 import pytest
 
-from eeg2vec.pre_process._utils import min_max_normalize
-from eeg2vec.pre_process._utils import scaling
+from eeg2vec.pre_process._pre_process import min_max_normalize
+from eeg2vec.pre_process._pre_process import scaling
 
 
 

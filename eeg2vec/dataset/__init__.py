@@ -1,5 +1,7 @@
-from ._utils import EpochDataset
+from ._epoch_dataset import EpochDataset
+from ._collate import CollateEpochs
 
 __all__ = [
     'EpochDataset',
+    'CollateEpochs'
 ]
