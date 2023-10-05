@@ -7,3 +7,4 @@ __version__ = '0.2.0'
 # 0.0.3: reverted pandas version to 1.5.3
 # 0.1.0: added bendr models, dataset and transforms
 # 0.1.0: added collate function for epochs
+# 0.1.1: added normalization for channel data to pre-processing

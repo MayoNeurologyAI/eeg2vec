@@ -4,6 +4,7 @@ import torch
 import numpy as np
 from typing import Union, Tuple
 from torch.nn.functional import interpolate
+from sklearn.preprocessing import MinMaxScaler
 
 
 def min_max_normalize(x: torch.Tensor, low=-1, high=1) -> Tuple[torch.Tensor, float, float]:
@@ -159,6 +160,62 @@ def normalize_scale_interpolate(x: Union[np.ndarray, torch.Tensor],
     
     return x
 
+def min_max_normalize_channel_data(x: np.ndarray):
+    """ 
+    This function performs min max normalization on the channel data
+    
+    Parameters
+    ----------
+    x : torch.Tensor
+        EEG Single Channel data
+    
+    Returns
+    -------
+    x : np.ndarray
+        Normalized EEG Single Channel data
+    
+    """
+    scaler = MinMaxScaler(feature_range=(-1, 1))
+    return scaler.fit_transform(x).flatten()
+
+def check_epoch_validity(x: np.ndarray, data_max: float, data_min: float) -> float:
+    """ 
+    This function checks if the epoch is valid or not
+    A valid epoch is the one that has a 90th percentile value less than data_max and a 10 percentile value greater than data_min
+    
+    Parameters
+    ----------
+    x : np.ndarray
+        EEG Epoch
+    
+    data_max : float
+        Maximum value of the EEG Epoch in the dataset
+    
+    data_min : float
+        Minimum value of the EEG Epoch in the dataset
+    
+    Returns
+    -------
+    scale : float
+        Constant value for adding scaling channel
+        
+    """
+    tol = 0.0001
+    
+    max_scale = data_max - data_min
+    
+    p90 = np.quantile(x, 0.9, dim=-1)
+    p10 = np.quantile(x, 0.1, dim=-1)
+    
+    min_, max_ = torch.amin(p10), torch.amax(p90)
+    
+    if (max_ > (data_max + tol)) or (min_ < (data_min - tol)):
+        print(f" Max data: {max_:.4} & Min data: {min_:.4}")
+        return False
+    
+    
+    return True
+    
 def annotate_nans(eeg):
     """
     Add NAN annotations to already existing annotations
