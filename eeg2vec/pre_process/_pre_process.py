@@ -202,12 +202,7 @@ def check_epoch_validity(x: np.ndarray, data_max: float, data_min: float) -> flo
     """
     tol = 0.0001
     
-    max_scale = data_max - data_min
-    
-    p90 = np.quantile(x, 0.9, dim=-1)
-    p10 = np.quantile(x, 0.1, dim=-1)
-    
-    min_, max_ = torch.amin(p10), torch.amax(p90)
+    min_, max_ = np.min(x), np.max(x)
     
     if (max_ > (data_max + tol)) or (min_ < (data_min - tol)):
         print(f" Max data: {max_:.4} & Min data: {min_:.4}")
