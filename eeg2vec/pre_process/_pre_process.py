@@ -176,7 +176,7 @@ def min_max_normalize_channel_data(x: np.ndarray):
     
     """
     scaler = MinMaxScaler(feature_range=(-1, 1))
-    return scaler.fit_transform(x).flatten()
+    return scaler.fit_transform(x.reshape(-1, 1)).flatten()
 
 def check_epoch_validity(x: np.ndarray, data_max: float, data_min: float) -> float:
     """ 
